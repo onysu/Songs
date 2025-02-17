@@ -215,27 +215,28 @@
 
             <audio id="audio-player" controls></audio>
 
+            <audio id="audio" src="uploads/your-song.mp3"></audio>
+
             <div class="player-controls">
+              <button class="neumorphic-btn" onclick="prevSong()">
+                <i class="fas fa-backward"></i>
+              </button>
 
-              <audio id="audio" src="uploads/your-song.mp3"></audio>
+              <!-- Tombol Play dengan id="play-btn" -->
+              <button class="neumorphic-btn" id="play-btn" onclick="togglePlay()">
+                <i class="fas fa-play"></i>
+              </button>
 
-              <div class="player-controls">
-                <button class="neumorphic-btn" onclick="prevSong()">
-                  <i class="fas fa-backward"></i>
-                </button>
-
-                <!-- Tombol Play dengan id="play-btn" -->
-                <button class="neumorphic-btn" id="play-btn" onclick="togglePlay()">
-                  <i class="fas fa-play"></i>
-                </button>
-
-                <button class="neumorphic-btn" onclick="nextSong()">
-                  <i class="fas fa-forward"></i>
-                </button>
-              </div>
+              <button class="neumorphic-btn" onclick="nextSong()">
+                <i class="fas fa-forward"></i>
+              </button>
             </div>
+          </div>
 
+          <div style="display: flex; justify-content: center; align-items: center;">
+            <button class="neumorphic-btn m-auto my-4" id=""><i class="fa-solid fa-shuffle"></i></button>
             <button class="neumorphic-btn m-auto my-4" id="repeat-btn">Repeat: Off</button>
+            <button class="neumorphic-btn m-auto my-4" id=""><i class="fa-solid fa-heart"></i></button>
           </div>
 
         </div>
