@@ -29,9 +29,9 @@
       display: flex;
       gap: 20px;
       /* Jarak antar tombol */
-      /* justify-content: center; */
+      justify-content: center;
       align-items: center;
-      /* margin-top: 20px; */
+      margin-top: 20px;
       margin-top: 10px;
     }
 
@@ -59,8 +59,8 @@
     }
 
     #repeat-btn {
-      margin-top: 20px;
-      margin-bottom: 20px;
+      /* margin-top: 20px; */
+      /* margin-bottom: 20px; */
       width: 113px;
       height: 30px;
       font-size: 16px;
@@ -91,7 +91,7 @@
       justify-content: space-between;
       align-items: center;
       /* padding: 12px 16px; */
-      border-bottom: 1px solid #333;
+      border-bottom: 1px solid gray;
       cursor: pointer;
       transition: background 0.2s;
     }
@@ -191,7 +191,7 @@
     </ul>
   </div>
 
-  <div class="container">
+  <div class="container py-4">
     <!-- <header class="pb-3 mb-4 border-bottom">
       <a href="/" class="d-flex align-items-center text-body-emphasis text-decoration-none">
         <svg xmlns="http://www.w3.org/2000/svg" width="40" height="32" class="me-2" viewBox="0 0 118 94" role="img">
@@ -208,7 +208,7 @@
       <div class="col-md-6">
         <div class="h-100">
 
-          <div class="player">
+          <div class="player text-center">
             <div class="h2">
               <i class="fa-solid fa-headphones me-2"></i> <span id="song-title">Pilih Lagu</span>
             </div>
@@ -235,7 +235,7 @@
               </div>
             </div>
 
-            <button class="neumorphic-btn" id="repeat-btn">Repeat: Off</button>
+            <button class="neumorphic-btn m-auto my-4" id="repeat-btn">Repeat: Off</button>
           </div>
 
         </div>
@@ -253,9 +253,9 @@
       </div>
     </div>
 
-    <!-- <footer class="pt-3 mt-4 text-body-secondary border-top">
-      &copy; 2025
-    </footer> -->
+    <footer class="pt-3 mt-4 text-body-secondary border-top small">
+      &copy; Dev by Ony 2025
+    </footer>
   </div>
 
   <script src="dist/bootstrap.bundle.min.js"></script>
@@ -286,7 +286,7 @@
         playlist.innerHTML = ""; // Kosongkan list sebelum menambahkan data baru
         songs.forEach((song, index) => {
           let li = document.createElement("li");
-          li.classList.add("song-item", "d-flex", "align-items-center", "p-2");
+          li.classList.add("song-item", "d-flex", "align-items-center", "px-2");
           li.dataset.file = song.file_path;
           li.onclick = () => playSong(index);
 
