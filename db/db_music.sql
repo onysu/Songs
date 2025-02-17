@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 17 Feb 2025 pada 09.23
+-- Waktu pembuatan: 17 Feb 2025 pada 09.30
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -39,7 +39,7 @@ CREATE TABLE `songs` (
 --
 
 INSERT INTO `songs` (`id`, `title`, `artist`, `file_path`) VALUES
-(2, 'frewqaf', 'aewrf', 'uploads/1739780038_Bring-Me-The-Horizon-Drown.mp3');
+(1, 'Zona Nyaman', 'Fourtwnty', 'uploads/1739781004_Fourtwnty-ZonaNyaman.mp3');
 
 --
 -- Indexes for dumped tables
@@ -59,7 +59,7 @@ ALTER TABLE `songs`
 -- AUTO_INCREMENT untuk tabel `songs`
 --
 ALTER TABLE `songs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
