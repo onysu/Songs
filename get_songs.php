@@ -22,7 +22,7 @@ $getID3 = new getID3();
 
 while ($row = $result->fetch_assoc()) {
   $file = $row['file_path'];
-  $coverPath = "uploads/default_cover.jpg"; // Gambar default
+  $coverPath = "uploads/covers/default_cover.png"; // Gambar default
   $duration = null; // Inisialisasi durasi sebagai null
 
   if (file_exists($file)) {

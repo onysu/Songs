@@ -458,27 +458,37 @@
       const file = event.target.files[0];
       if (!file) return;
 
+      const audioPlayer = document.getElementById("audio-player");
+      const coverImage = document.querySelector(".figure-img");
+
       const fileURL = URL.createObjectURL(file);
       audioPlayer.src = fileURL;
       audioPlayer.play();
 
-      // Baca metadata ID3
-      jsmediatags.read(file, {
-        onSuccess: function (tag) {
-          if (tag.tags.picture) {
-            let base64String = "";
-            let data = tag.tags.picture.data;
-            let format = tag.tags.picture.format;
-            for (let i = 0; i < data.length; i++) {
-              base64String += String.fromCharCode(data[i]);
+      // Gunakan FileReader untuk membaca metadata ID3
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        jsmediatags.read({
+          file: file,
+          type: jsmediatags.Reader.FILE,
+        }, {
+          onSuccess: function (tag) {
+            if (tag.tags.picture) {
+              let base64String = "";
+              let data = tag.tags.picture.data;
+              let format = tag.tags.picture.format;
+              for (let i = 0; i < data.length; i++) {
+                base64String += String.fromCharCode(data[i]);
+              }
+              coverImage.src = `data:${format};base64,${btoa(base64String)}`;
             }
-            coverImage.src = `data:${format};base64,${btoa(base64String)}`;
+          },
+          onError: function (error) {
+            console.warn("Tidak bisa membaca metadata:", error);
           }
-        },
-        onError: function (error) {
-          console.warn("Tidak bisa membaca metadata:", error);
-        }
-      });
+        });
+      };
+      reader.readAsArrayBuffer(file);
     });
   </script>
 
