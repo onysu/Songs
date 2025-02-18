@@ -23,6 +23,45 @@
       max-width: 960px;
     }
   </style>
+  <style>
+    .neumorphic-btn {
+      color: inherit;
+      position: relative;
+      background: inherit;
+      outline: none;
+      border: none;
+      -webkit-box-shadow: -4px -2px 4px 0px #ffffff, 4px 2px 6px 0px #DFE4EA;
+      box-shadow: -4px -2px 4px 0px #ffffff, 4px 2px 6px 0px #DFE4EA;
+      border-radius: 3px;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+
+    .neumorphic-btn:focus::after,
+    .neumorphic-btn:active::after,
+    .btn.active::after,
+    .toggle-group input:checked+label::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 3px;
+      -webkit-box-shadow: 2px 2px 2px 0px #DFE4EA inset, -2px -2px 2px 0px #ffffff inset;
+      box-shadow: 2px 2px 2px 0px #DFE4EA inset, -2px -2px 2px 0px #ffffff inset;
+    }
+
+    .neumorphic-btn {
+      padding: 0.5rem 0.75rem;
+    }
+
+    .neumorphic-btn svg.feather {
+      color: #8fa3bc;
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  </style>
   <!-- <style>
     .bd-placeholder-img {
       font-size: 1.125rem;
