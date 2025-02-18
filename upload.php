@@ -81,5 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_FILES["song"])) {
 } else {
   die("<br>Tidak ada file yang diunggah.");
 }
-
+// Redirect ke index.html jika berhasil
+header("Location: index.html");
+exit();
 $conn->close();
