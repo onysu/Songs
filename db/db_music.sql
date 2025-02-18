@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 18 Feb 2025 pada 08.22
+-- Waktu pembuatan: 18 Feb 2025 pada 14.40
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -20,6 +20,26 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_music`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `lagu`
+--
+
+CREATE TABLE `lagu` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `file` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `lagu`
+--
+
+INSERT INTO `lagu` (`id`, `title`, `file`) VALUES
+(1, 'Fourtwnty', 'uploads/Fourtwnty-ZonaNyaman.mp3'),
+(2, 'Taylor Swift', 'uploads/Taylor Swift - Midnights.mp3');
 
 -- --------------------------------------------------------
 
@@ -56,6 +76,12 @@ INSERT INTO `songs` (`id`, `title`, `artist`, `file_path`, `duration`) VALUES
 --
 
 --
+-- Indeks untuk tabel `lagu`
+--
+ALTER TABLE `lagu`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeks untuk tabel `songs`
 --
 ALTER TABLE `songs`
@@ -66,6 +92,12 @@ ALTER TABLE `songs`
 --
 -- AUTO_INCREMENT untuk tabel yang dibuang
 --
+
+--
+-- AUTO_INCREMENT untuk tabel `lagu`
+--
+ALTER TABLE `lagu`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `songs`
