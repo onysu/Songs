@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 17 Feb 2025 pada 19.40
+-- Waktu pembuatan: 18 Feb 2025 pada 06.47
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -48,8 +48,8 @@ INSERT INTO `songs` (`id`, `title`, `artist`, `file_path`, `duration`) VALUES
 (7, 'Untuk Perempuan Yang Sedang Di Pelukan', 'Payung Teduh', 'uploads/1739816662_PayungTeduh-Untuk Perempuan.mp3', NULL),
 (8, 'Face Down', 'The Red Jumpsuit Apparatus', 'uploads/1739816862_The-Red-Jumpsuit-Apparatus-Face-Down.mp3', NULL),
 (9, 'Sofia', 'Clairo', 'uploads/1739817298_Clairo - Sofia.mp3', NULL),
-(10, 'Snowman', 'Sia', 'uploads/1739817418_Sia - Snowman.mp3', NULL),
-(11, 'Leave The Door Open', 'Bruno Mars, Anderson. Paak, Silk Sonic', 'uploads/1739817552_Bruno Mars, Anderson. Paak, Silk Sonic - Leave The Door Open.mp3', NULL);
+(11, 'Leave The Door Open', 'Bruno Mars, Anderson. Paak, Silk Sonic', 'uploads/1739817552_Bruno Mars, Anderson. Paak, Silk Sonic - Leave The Door Open.mp3', NULL),
+(13, 'Melukis Senja', 'Budi Doremi', 'uploads/1739857424_Budi Doremi - Melukis Senja.mp3', NULL);
 
 --
 -- Indexes for dumped tables
@@ -71,7 +71,7 @@ ALTER TABLE `songs`
 -- AUTO_INCREMENT untuk tabel `songs`
 --
 ALTER TABLE `songs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
