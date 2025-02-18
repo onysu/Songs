@@ -253,31 +253,57 @@
       let playButton = document.getElementById("play-btn");
       let playIcon = playButton.querySelector("i");
       let repeatButton = document.getElementById("repeat-btn");
-      let coverImage = document.querySelector(".figure-img"); // Cover lagu
+      let coverImage = document.querySelector(".figure-img");
 
       let searchForm = document.getElementById("search-form");
       let searchInput = document.getElementById("search-input");
 
       let songs = [];
+      let filteredSongs = []; // Daftar lagu yang difilter berdasarkan pencarian
       let currentIndex = 0;
-      let repeatMode = 0; // 0 = Normal, 1 = Repeat One, 2 = Repeat All
-      const defaultCover = "uploads/default_cover.jpg"; // Gambar default jika tidak ada cover
+      let repeatMode = 0;
+      const defaultCover = "uploads/default_cover.jpg";
 
-      // Fetch data lagu dari server
-      fetch("get_songs.php")
-        .then(response => response.json())
-        .then(data => {
-          songs = data;
-          loadPlaylist();
-        })
-        .catch(error => console.error("Error fetching songs:", error));
+      searchForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        let keyword = searchInput.value.toLowerCase().trim();
+        filterPlaylist(keyword);
+      });
+
+      function filterPlaylist(keyword) {
+        filteredSongs = songs.filter(song =>
+          song.title.toLowerCase().includes(keyword) ||
+          song.artist.toLowerCase().includes(keyword)
+        );
+        displaySongs(filteredSongs);
+      }
+
+      function displaySongs(songList) {
+        playlist.innerHTML = "";
+        songList.forEach((song, index) => {
+          let li = document.createElement("li");
+          li.classList.add("song-item", "d-flex", "align-items-center", "px-2");
+          li.dataset.index = index; // Gunakan dataset index dari filteredSongs
+          li.onclick = () => playFilteredSong(index);
+
+          li.innerHTML = `
+                    <img src="${song.cover || defaultCover}" alt="Cover" class="rounded" width="50" height="50">
+                    <div class="ms-3">
+                        <div class="fw-bold text-body-emphasis">${song.title}</div>
+                        <p class="text-body-secondary small">${song.artist}</p>
+                    </div>
+                    <span class="ms-auto text-body-secondary small">${song.duration}</span>
+                `;
+          playlist.appendChild(li);
+        });
+      }
 
       function loadPlaylist() {
-        playlist.innerHTML = ""; // Kosongkan daftar sebelum menambahkan data baru
+        playlist.innerHTML = "";
         songs.forEach((song, index) => {
           let li = document.createElement("li");
           li.classList.add("song-item", "d-flex", "align-items-center", "px-2");
-          li.dataset.file = song.file_path;
+          li.dataset.index = index;
           li.onclick = () => playSong(index);
 
           li.innerHTML = `
@@ -297,31 +323,27 @@
         if (!songs[index] || !songs[index].file_path) return;
 
         currentIndex = index;
-        songTitle.textContent = songs[index].title;
-        audioPlayer.src = songs[index].file_path;
+        updatePlayer(songs[currentIndex]);
+      }
+
+      function playFilteredSong(index) {
+        if (!filteredSongs[index] || !filteredSongs[index].file_path) return;
+
+        let originalIndex = songs.findIndex(song => song.file_path === filteredSongs[index].file_path);
+        currentIndex = originalIndex;
+
+        updatePlayer(filteredSongs[index]);
+      }
+
+      function updatePlayer(song) {
+        songTitle.textContent = song.title;
+        audioPlayer.src = song.file_path;
         audioPlayer.play();
 
-        // **Update cover image saat lagu berubah**
-        coverImage.src = songs[index].cover || defaultCover;
-        coverImage.alt = `Cover for ${songs[index].title}`;
+        coverImage.src = song.cover || defaultCover;
+        coverImage.alt = `Cover for ${song.title}`;
 
         updatePlayButton(true);
-      }
-
-      function prevSong() {
-        if (currentIndex > 0) {
-          playSong(currentIndex - 1);
-        } else {
-          playSong(songs.length - 1); // Jika di awal, kembali ke lagu terakhir
-        }
-      }
-
-      function nextSong() {
-        if (currentIndex < songs.length - 1) {
-          playSong(currentIndex + 1);
-        } else if (repeatMode === 2) {
-          playSong(0); // Jika Repeat All, kembali ke lagu pertama
-        }
       }
 
       function togglePlay() {
@@ -339,6 +361,22 @@
         playIcon.classList.toggle("fa-pause", isPlaying);
       }
 
+      function prevSong() {
+        if (currentIndex > 0) {
+          playSong(currentIndex - 1);
+        } else {
+          playSong(songs.length - 1);
+        }
+      }
+
+      function nextSong() {
+        if (currentIndex < songs.length - 1) {
+          playSong(currentIndex + 1);
+        } else if (repeatMode === 2) {
+          playSong(0);
+        }
+      }
+
       function toggleRepeat() {
         repeatMode = (repeatMode + 1) % 3;
         updateRepeatButton();
@@ -349,61 +387,27 @@
         repeatButton.textContent = repeatTexts[repeatMode];
       }
 
-      searchForm.addEventListener("submit", function (event) {
-        event.preventDefault(); // Mencegah reload halaman
-        let keyword = searchInput.value.toLowerCase().trim();
-        filterPlaylist(keyword);
-      });
+      fetch("get_songs.php")
+        .then(response => response.json())
+        .then(data => {
+          songs = data;
+          loadPlaylist();
+        })
+        .catch(error => console.error("Error fetching songs:", error));
 
-      function filterPlaylist(keyword) {
-        let filteredSongs = songs.filter(song =>
-          song.title.toLowerCase().includes(keyword) ||
-          song.artist.toLowerCase().includes(keyword)
-        );
-
-        displaySongs(filteredSongs);
-      }
-
-      function displaySongs(songList) {
-        playlist.innerHTML = ""; // Kosongkan daftar sebelumnya
-        songList.forEach((song, index) => {
-          let li = document.createElement("li");
-          li.classList.add("song-item", "d-flex", "align-items-center", "px-2");
-          li.dataset.file = song.file_path;
-          li.onclick = () => playSong(index);
-
-          li.innerHTML = `
-        <img src="${song.cover}" alt="Cover" class="rounded" width="50" height="50">
-        <div class="ms-3">
-            <div class="fw-bold text-body-emphasis">${song.title}</div>
-            <p class="text-body-secondary small">${song.artist}</p>
-        </div>
-        <span class="ms-auto text-body-secondary small">${song.duration}</span>
-      `;
-
-          playlist.appendChild(li);
-        });
-      }
-
-      // Pastikan fungsi tersedia di global scope agar tombol bisa mengaksesnya
-      window.prevSong = prevSong;
-      window.nextSong = nextSong;
-      window.togglePlay = togglePlay;
-
-      // Event Listeners
       playButton.addEventListener("click", togglePlay);
       repeatButton.addEventListener("click", toggleRepeat);
 
       audioPlayer.addEventListener("ended", function () {
         if (repeatMode === 1) {
           audioPlayer.currentTime = 0;
-          audioPlayer.play(); // Jika mode Repeat One, putar ulang lagu saat ini
+          audioPlayer.play();
         } else {
-          nextSong(); // Jika tidak, lanjut ke lagu berikutnya
+          nextSong();
         }
       });
 
-      updateRepeatButton(); // Set ulang tombol repeat saat halaman dimuat
+      updateRepeatButton();
     });
   </script>
 
