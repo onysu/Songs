@@ -200,7 +200,7 @@
           <div class="player text-center">
 
             <figure class="figure">
-              <img src="uploads/default_cover.png" class="figure-img img-fluid rounded" alt="cover">
+              <img src="uploads/covers/default_cover.png" class="figure-img img-fluid rounded" alt="cover">
               <figcaption class="figure-caption"><i class="fa-solid fa-headphones me-2"></i> <span id="song-title">Pilih
                   Lagu</span></figcaption>
             </figure>
@@ -263,7 +263,7 @@
       let filteredSongs = []; // Daftar lagu yang difilter berdasarkan pencarian
       let currentIndex = 0;
       let repeatMode = 0;
-      const defaultCover = "uploads/default_cover.png";
+      const defaultCover = "uploads/covers/default_cover.png";
 
       searchForm.addEventListener("submit", function (event) {
         event.preventDefault();
@@ -320,46 +320,46 @@
         });
       }
 
-      function playSong(index) {
-        if (!songs[index] || !songs[index].file_path) return;
-
-        currentIndex = index;
-        songTitle.textContent = songs[index].title;
-        audioPlayer.src = songs[index].file_path;
-        audioPlayer.play();
-
-        // Set default cover jika tidak ada metadata
-        coverImage.src = songs[index].cover || defaultCover;
-        coverImage.alt = `Cover for ${songs[index].title}`;
-
-        // Baca metadata ID3
-        jsmediatags.read(songs[index].file_path, {
-          onSuccess: function (tag) {
-            let tags = tag.tags;
-            if (tags.picture) {
-              let base64String = "";
-              let data = tags.picture.data;
-              let format = tags.picture.format;
-              for (let i = 0; i < data.length; i++) {
-                base64String += String.fromCharCode(data[i]);
-              }
-              coverImage.src = `data:${format};base64,${btoa(base64String)}`;
-            }
-          },
-          onError: function (error) {
-            console.warn("Tidak bisa membaca metadata:", error);
-          }
-        });
-
-        updatePlayer(songs[currentIndex]); // Pastikan fungsi ini ada
-      }
-
       // function playSong(index) {
       //   if (!songs[index] || !songs[index].file_path) return;
 
       //   currentIndex = index;
-      //   updatePlayer(songs[currentIndex]);
+      //   songTitle.textContent = songs[index].title;
+      //   audioPlayer.src = songs[index].file_path;
+      //   audioPlayer.play();
+
+      //   // Set default cover jika tidak ada metadata
+      //   coverImage.src = songs[index].cover || defaultCover;
+      //   coverImage.alt = `Cover for ${songs[index].title}`;
+
+      //   // Baca metadata ID3
+      //   jsmediatags.read(songs[index].file_path, {
+      //     onSuccess: function (tag) {
+      //       let tags = tag.tags;
+      //       if (tags.picture) {
+      //         let base64String = "";
+      //         let data = tags.picture.data;
+      //         let format = tags.picture.format;
+      //         for (let i = 0; i < data.length; i++) {
+      //           base64String += String.fromCharCode(data[i]);
+      //         }
+      //         coverImage.src = `data:${format};base64,${btoa(base64String)}`;
+      //       }
+      //     },
+      //     onError: function (error) {
+      //       console.warn("Tidak bisa membaca metadata:", error);
+      //     }
+      //   });
+
+      //   updatePlayer(songs[currentIndex]); // Pastikan fungsi ini ada
       // }
+
+      function playSong(index) {
+        if (!songs[index] || !songs[index].file_path) return;
+
+        currentIndex = index;
+        updatePlayer(songs[currentIndex]);
+      }
 
       function playFilteredSong(index) {
         if (!filteredSongs[index] || !filteredSongs[index].file_path) return;
@@ -450,6 +450,35 @@
       });
 
       updateRepeatButton();
+    });
+  </script>
+
+  <script>
+    document.getElementById('fileInput').addEventListener('change', function (event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const fileURL = URL.createObjectURL(file);
+      audioPlayer.src = fileURL;
+      audioPlayer.play();
+
+      // Baca metadata ID3
+      jsmediatags.read(file, {
+        onSuccess: function (tag) {
+          if (tag.tags.picture) {
+            let base64String = "";
+            let data = tag.tags.picture.data;
+            let format = tag.tags.picture.format;
+            for (let i = 0; i < data.length; i++) {
+              base64String += String.fromCharCode(data[i]);
+            }
+            coverImage.src = `data:${format};base64,${btoa(base64String)}`;
+          }
+        },
+        onError: function (error) {
+          console.warn("Tidak bisa membaca metadata:", error);
+        }
+      });
     });
   </script>
 
