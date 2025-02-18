@@ -19,7 +19,7 @@
     /* Tidak diperlukan untuk metode template atau footer lengket. */
 
     main>.container {
-      padding: 70px 15px 0;
+      padding: 75px 15px 0;
       max-width: 960px;
     }
   </style>
@@ -200,7 +200,7 @@
           <div class="player text-center">
 
             <figure class="figure">
-              <img src="uploads/default_cover.jpg" class="figure-img img-fluid rounded" width="auto" alt="cover">
+              <img src="uploads/default_cover.png" class="figure-img img-fluid rounded" alt="cover">
               <figcaption class="figure-caption"><i class="fa-solid fa-headphones me-2"></i> <span id="song-title">Pilih
                   Lagu</span></figcaption>
             </figure>
@@ -244,6 +244,7 @@
   </footer>
 
   <script src="dist/bootstrap.bundle.min.js"></script>
+  <script src="dist/jsmediatags.min.js"></script>
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -262,7 +263,7 @@
       let filteredSongs = []; // Daftar lagu yang difilter berdasarkan pencarian
       let currentIndex = 0;
       let repeatMode = 0;
-      const defaultCover = "uploads/default_cover.jpg";
+      const defaultCover = "uploads/default_cover.png";
 
       searchForm.addEventListener("submit", function (event) {
         event.preventDefault();
@@ -323,8 +324,42 @@
         if (!songs[index] || !songs[index].file_path) return;
 
         currentIndex = index;
-        updatePlayer(songs[currentIndex]);
+        songTitle.textContent = songs[index].title;
+        audioPlayer.src = songs[index].file_path;
+        audioPlayer.play();
+
+        // Set default cover jika tidak ada metadata
+        coverImage.src = songs[index].cover || defaultCover;
+        coverImage.alt = `Cover for ${songs[index].title}`;
+
+        // Baca metadata ID3
+        jsmediatags.read(songs[index].file_path, {
+          onSuccess: function (tag) {
+            let tags = tag.tags;
+            if (tags.picture) {
+              let base64String = "";
+              let data = tags.picture.data;
+              let format = tags.picture.format;
+              for (let i = 0; i < data.length; i++) {
+                base64String += String.fromCharCode(data[i]);
+              }
+              coverImage.src = `data:${format};base64,${btoa(base64String)}`;
+            }
+          },
+          onError: function (error) {
+            console.warn("Tidak bisa membaca metadata:", error);
+          }
+        });
+
+        updatePlayer(songs[currentIndex]); // Pastikan fungsi ini ada
       }
+
+      // function playSong(index) {
+      //   if (!songs[index] || !songs[index].file_path) return;
+
+      //   currentIndex = index;
+      //   updatePlayer(songs[currentIndex]);
+      // }
 
       function playFilteredSong(index) {
         if (!filteredSongs[index] || !filteredSongs[index].file_path) return;
