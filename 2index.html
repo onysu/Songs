@@ -193,16 +193,15 @@
               <a class="nav-link disabled" aria-disabled="true">Disabled</a>
             </li>
           </ul> -->
-            <form class="d-flex ms-auto" role="search"> 
+          <form class="d-flex ms-auto" role="search">
             <input class="form-control me-2" type="search" placeholder="cari lagu ..." aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Cari</button>
-            </form>
+          </form>
         </div>
       </div>
     </nav>
   </header>
 
-  <!-- Begin page content -->
   <main class="flex-shrink-0">
     <div class="container">
 
@@ -213,12 +212,9 @@
 
             <figure class="figure">
               <img src="uploads/default_cover.jpg" class="figure-img img-fluid rounded" width="auto" alt="cover">
-              <figcaption class="figure-caption"><i class="fa-solid fa-headphones me-2"></i> <span id="song-title">Pilih Lagu</span></figcaption>
+              <figcaption class="figure-caption"><i class="fa-solid fa-headphones me-2"></i> <span id="song-title">Pilih
+                  Lagu</span></figcaption>
             </figure>
-
-            <!-- <div class="h2">
-              <i class="fa-solid fa-headphones me-2"></i> <span id="song-title">Pilih Lagu</span>
-            </div> -->
 
             <audio id="audio-player" controls></audio>
             <audio id="audio" src="uploads/your-song.mp3"></audio>
@@ -259,6 +255,7 @@
   </footer>
 
   <script src="dist/bootstrap.bundle.min.js"></script>
+
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       let audioPlayer = document.getElementById("audio-player");
@@ -267,10 +264,12 @@
       let playButton = document.getElementById("play-btn");
       let playIcon = playButton.querySelector("i");
       let repeatButton = document.getElementById("repeat-btn");
+      let coverImage = document.querySelector(".figure-img"); // Cover lagu
 
       let songs = [];
       let currentIndex = 0;
       let repeatMode = 0; // 0 = Normal, 1 = Repeat One, 2 = Repeat All
+      const defaultCover = "uploads/default_cover.jpg"; // Gambar default jika tidak ada cover
 
       // Fetch data lagu dari server
       fetch("get_songs.php")
@@ -282,7 +281,7 @@
         .catch(error => console.error("Error fetching songs:", error));
 
       function loadPlaylist() {
-        playlist.innerHTML = ""; // Kosongkan list sebelum menambahkan data baru
+        playlist.innerHTML = ""; // Kosongkan daftar sebelum menambahkan data baru
         songs.forEach((song, index) => {
           let li = document.createElement("li");
           li.classList.add("song-item", "d-flex", "align-items-center", "px-2");
@@ -290,13 +289,13 @@
           li.onclick = () => playSong(index);
 
           li.innerHTML = `
-            <img src="${song.cover}" alt="Cover" class="rounded" width="50" height="50">
-            <div class="ms-3">
-                <div class="fw-bold text-body-emphasis">${song.title}</div>
-                <p class="text-body-secondary small">${song.artist}</p>
-            </div>
-            <span class="ms-auto text-body-secondary small">${song.duration}</span>
-        `;
+                    <img src="${song.cover || defaultCover}" alt="Cover" class="rounded" width="50" height="50">
+                    <div class="ms-3">
+                        <div class="fw-bold text-body-emphasis">${song.title}</div>
+                        <p class="text-body-secondary small">${song.artist}</p>
+                    </div>
+                    <span class="ms-auto text-body-secondary small">${song.duration}</span>
+                `;
 
           playlist.appendChild(li);
         });
@@ -309,18 +308,27 @@
         songTitle.textContent = songs[index].title;
         audioPlayer.src = songs[index].file_path;
         audioPlayer.play();
+
+        // **Update cover image saat lagu berubah**
+        coverImage.src = songs[index].cover || defaultCover;
+        coverImage.alt = `Cover for ${songs[index].title}`;
+
         updatePlayButton(true);
       }
 
       function prevSong() {
-        if (currentIndex > 0) playSong(currentIndex - 1);
+        if (currentIndex > 0) {
+          playSong(currentIndex - 1);
+        } else {
+          playSong(songs.length - 1); // Jika di awal, kembali ke lagu terakhir
+        }
       }
 
       function nextSong() {
         if (currentIndex < songs.length - 1) {
           playSong(currentIndex + 1);
         } else if (repeatMode === 2) {
-          playSong(0); // Repeat All: kembali ke lagu pertama
+          playSong(0); // Jika Repeat All, kembali ke lagu pertama
         }
       }
 
@@ -349,6 +357,11 @@
         repeatButton.textContent = repeatTexts[repeatMode];
       }
 
+      // Pastikan fungsi tersedia di global scope agar tombol bisa mengaksesnya
+  window.prevSong = prevSong;
+  window.nextSong = nextSong;
+  window.togglePlay = togglePlay;
+
       // Event Listeners
       playButton.addEventListener("click", togglePlay);
       repeatButton.addEventListener("click", toggleRepeat);
@@ -356,9 +369,9 @@
       audioPlayer.addEventListener("ended", function () {
         if (repeatMode === 1) {
           audioPlayer.currentTime = 0;
-          audioPlayer.play();
+          audioPlayer.play(); // Jika mode Repeat One, putar ulang lagu saat ini
         } else {
-          nextSong();
+          nextSong(); // Jika tidak, lanjut ke lagu berikutnya
         }
       });
 
