@@ -10,7 +10,9 @@
   <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
   <meta name="generator" content="Hugo 0.122.0">
   <title>My Music Player</title>
-  <link href="dist/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="dist/bootstrap.min.css">
+  <!-- <link rel="stylesheet" href="dist/bootstrap-icons/font/bootstrap-icons.min.css"> -->
+  <link rel="stylesheet" href="dist/bootstrap-icons/font/bootstrap-icons.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <link rel="shortcut icon" href="assets/img/favicons/ony.ico" type="image/x-icon">
   <style>
@@ -27,45 +29,7 @@
       max-width: 960px;
     }
   </style>
-  <style>
-    .neumorphic-btn {
-      color: inherit;
-      position: relative;
-      background: inherit;
-      outline: none;
-      border: none;
-      -webkit-box-shadow: -4px -2px 4px 0px #ffffff, 4px 2px 6px 0px #DFE4EA;
-      box-shadow: -4px -2px 4px 0px #ffffff, 4px 2px 6px 0px #DFE4EA;
-      border-radius: 3px;
-      cursor: pointer;
-      text-transform: uppercase;
-    }
 
-    .neumorphic-btn:focus::after,
-    .neumorphic-btn:active::after,
-    .btn.active::after,
-    .toggle-group input:checked+label::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      border-radius: 3px;
-      -webkit-box-shadow: 2px 2px 2px 0px #DFE4EA inset, -2px -2px 2px 0px #ffffff inset;
-      box-shadow: 2px 2px 2px 0px #DFE4EA inset, -2px -2px 2px 0px #ffffff inset;
-    }
-
-    .neumorphic-btn {
-      padding: 0.5rem 0.75rem;
-    }
-
-    .neumorphic-btn svg.feather {
-      color: #8fa3bc;
-      width: 1.25rem;
-      height: 1.25rem;
-    }
-  </style>
   <!-- <style>
     .bd-placeholder-img {
       font-size: 1.125rem;
@@ -166,9 +130,6 @@
         d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z" />
     </symbol>
   </svg>
-
-
-
   <header>
     <nav class="navbar navbar-expand-md fixed-top bg-body-tertiary">
       <div class="container">
@@ -191,11 +152,9 @@
   <main class="flex-shrink-0">
     <div class="container">
 
-      <!-- <h1 class="mt-5">Sticky footer with fixed navbar</h1> -->
       <div class="row align-items-md-stretch">
         <div class="col-md-6">
           <div class="player text-center">
-
             <figure class="figure">
               <img src="uploads/covers/default_cover.png" class="figure-img img-fluid rounded" alt="cover">
               <figcaption class="figure-caption"><i class="fa-solid fa-headphones me-2"></i> <span id="song-title">Pilih
@@ -203,25 +162,53 @@
             </figure>
 
             <audio id="audio-player" controls></audio>
+
             <audio id="audio" src="uploads/your-song.mp3"></audio>
+
             <div class="player-controls">
-              <button class="neumorphic-btn" id="prev-btn" onclick="prevSong()">
+              <button id="prev-btn" onclick="prevSong()">
                 <i class="fas fa-backward"></i>
               </button>
-              <!-- Tombol Play dengan id="play-btn" -->
-              <button class="neumorphic-btn" id="play-btn" onclick="togglePlay()">
+              <button id="play-btn" onclick="togglePlay()">
                 <i class="fas fa-play"></i>
               </button>
-              <button class="neumorphic-btn" id="next-btn" onclick="nextSong()">
+              <button id="next-btn" onclick="nextSong()">
                 <i class="fas fa-forward"></i>
+              </button>
+              <button id="shuffle-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shuffle"
+                  viewBox="0 0 16 16">
+                  <path fill-rule="evenodd"
+                    d="M0 3.5A.5.5 0 0 1 .5 3H1c2.202 0 3.827 1.24 4.874 2.418.49.552.865 1.102 1.126 1.532.26-.43.636-.98 1.126-1.532C9.173 4.24 10.798 3 13 3v1c-1.798 0-3.173 1.01-4.126 2.082A9.6 9.6 0 0 0 7.556 8a9.6 9.6 0 0 0 1.317 1.918C9.828 10.99 11.204 12 13 12v1c-2.202 0-3.827-1.24-4.874-2.418A10.6 10.6 0 0 1 7 9.05c-.26.43-.636.98-1.126 1.532C4.827 11.76 3.202 13 1 13H.5a.5.5 0 0 1 0-1H1c1.798 0 3.173-1.01 4.126-2.082A9.6 9.6 0 0 0 6.444 8a9.6 9.6 0 0 0-1.317-1.918C4.172 5.01 2.796 4 1 4H.5a.5.5 0 0 1-.5-.5" />
+                  <path
+                    d="M13 5.466V1.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192m0 9v-3.932a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192" />
+                </svg>
+              </button>
+              <button id="mute-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-volume-up-fill" viewBox="0 0 16 16">
+                  <path
+                    d="M11.536 14.01A8.47 8.47 0 0 0 14.026 8a8.47 8.47 0 0 0-2.49-6.01l-.708.707A7.48 7.48 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303z" />
+                  <path
+                    d="M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.48 5.48 0 0 1 11.025 8a5.48 5.48 0 0 1-1.61 3.89z" />
+                  <path
+                    d="M8.707 11.182A4.5 4.5 0 0 0 10.025 8a4.5 4.5 0 0 0-1.318-3.182L8 5.525A3.5 3.5 0 0 1 9.025 8 3.5 3.5 0 0 1 8 10.475zM6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06" />
+                </svg>
+              </button>
+              <button id="repeat-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-repeat"
+                  viewBox="0 0 16 16">
+                  <path
+                    d="M11 5.466V4H5a4 4 0 0 0-3.584 5.777.5.5 0 1 1-.896.446A5 5 0 0 1 5 3h6V1.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192m3.81.086a.5.5 0 0 1 .67.225A5 5 0 0 1 11 13H5v1.466a.25.25 0 0 1-.41.192l-2.36-1.966a.25.25 0 0 1 0-.384l2.36-1.966a.25.25 0 0 1 .41.192V12h6a4 4 0 0 0 3.585-5.777.5.5 0 0 1 .225-.67Z" />
+                </svg>
               </button>
             </div>
           </div>
-          <div style="display: flex; justify-content: center; align-items: center;">
-            <button class="neumorphic-btn m-auto my-4" id=""><i class="fa-solid fa-shuffle"></i></button>
-            <button class="neumorphic-btn m-auto my-4" id="repeat-btn">Repeat: Off</button>
-            <button class="neumorphic-btn m-auto my-4" id=""><i class="fa-solid fa-heart"></i></button>
-          </div>
+
+          <!-- <div style="display: flex; justify-content: center; align-items: center;">
+            
+          </div> -->
+
         </div>
 
         <div class="col-md-6">
@@ -311,6 +298,12 @@
 
       let searchForm = document.getElementById("search-form");
       let searchInput = document.getElementById("search-input");
+
+      let shuffleButton = document.getElementById("shuffle-btn");
+      let muteButton = document.getElementById("mute-btn");
+
+      let isShuffle = false;
+      let isMuted = false;
 
       let songs = [];
       let filteredSongs = []; // Daftar lagu yang difilter berdasarkan pencarian
@@ -444,8 +437,14 @@
       }
 
       function updateRepeatButton() {
-        const repeatTexts = ["Repeat: Off", "Repeat: One", "Repeat: All"];
-        repeatButton.textContent = repeatTexts[repeatMode];
+        // Menggunakan Bootstrap Icons
+        const repeatIcons = [
+          '<i class="bi bi-x"></i>',        // Repeat Off
+          '<i class="bi bi-repeat-1"></i>', // Repeat One
+          '<i class="bi bi-repeat"></i>'    // Repeat All
+        ];
+
+        repeatButton.innerHTML = repeatIcons[repeatMode];
       }
 
       fetch("get_songs.php")
@@ -469,6 +468,48 @@
       });
 
       updateRepeatButton();
+
+      // Fungsi Shuffle
+      function toggleShuffle() {
+        isShuffle = !isShuffle;
+        shuffleButton.classList.toggle("btn-primary", isShuffle); // Highlight tombol jika aktif
+        shuffleButton.innerHTML = isShuffle
+          ? '<i class="bi bi-shuffle text-white"></i>'
+          : '<i class="bi bi-shuffle"></i>';
+      }
+
+      function getNextSongIndex() {
+        if (isShuffle) {
+          return Math.floor(Math.random() * songs.length);
+        }
+        return (currentIndex + 1) % songs.length;
+      }
+
+      function nextSong() {
+        if (songs.length === 0) return;
+
+        if (repeatMode === 1) {
+          audioPlayer.currentTime = 0;
+          audioPlayer.play();
+          return;
+        }
+
+        currentIndex = getNextSongIndex();
+        playSong(currentIndex);
+      }
+
+      // Fungsi Mute
+      function toggleMute() {
+        isMuted = !isMuted;
+        audioPlayer.muted = isMuted;
+        muteButton.innerHTML = isMuted
+          ? '<i class="bi bi-volume-mute-fill"></i>'
+          : '<i class="bi bi-volume-up-fill"></i>';
+      }
+
+      // Event Listeners
+      shuffleButton.addEventListener("click", toggleShuffle);
+      muteButton.addEventListener("click", toggleMute);
     });
   </script>
 
