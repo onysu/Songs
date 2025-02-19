@@ -22,24 +22,6 @@
     .container {
       max-width: 960px;
     }
-
-    .visualizer {
-      font-weight: bold;
-      color: lime;
-      animation: visualizer-animation 0.5s infinite alternate;
-    }
-
-    @keyframes visualizer-animation {
-      from {
-        opacity: 0.5;
-        transform: scaleY(0.8);
-      }
-
-      to {
-        opacity: 1;
-        transform: scaleY(1.2);
-      }
-    }
   </style>
 
   <style>
@@ -505,12 +487,6 @@
       let isShuffled = false;
       let repeatMode = 0; // 0: Off, 1: Repeat One, 2: Repeat All
 
-      // audioPlayer.load();
-      // audioPlayer.play().catch(error => console.error("Error Play:", error));
-
-      // document.getElementById("audio-player").play();
-
-
       // Ambil daftar lagu dari database
       fetch("get_lagu.php")
         .then(response => response.json())
@@ -560,27 +536,6 @@
       }
 
       // Tampilkan daftar playlist
-      // function displayPlaylist(filteredSongs) {
-      //   playlist.innerHTML = "";
-      //   filteredSongs.forEach((song, index) => {
-      //     let listItem = document.createElement("li");
-      //     listItem.classList.add("list-group-item", "d-flex", "align-items-center");
-
-      //     listItem.innerHTML = `
-      //         <img src="${song.cover}" class="rounded me-3" width="50" height="50">
-      //         <div class="flex-grow-1">
-      //           <h6 class="mb-0">${song.title}</h6>
-      //           <small>${song.artist || "Unknown Artist"}</small>
-      //         </div>
-      //         <span class="text-muted">${song.duration ? formatTime(song.duration) : "Loading..."
-      //       }</span>
-      //       `;
-
-      //     listItem.addEventListener("click", () => loadSong(index));
-      //     playlist.appendChild(listItem);
-      //   });
-      // }
-
       function displayPlaylist(filteredSongs) {
         playlist.innerHTML = "";
         filteredSongs.forEach((song, index) => {
@@ -588,21 +543,16 @@
           listItem.classList.add("list-group-item", "d-flex", "align-items-center");
 
           listItem.innerHTML = `
-            <img src="${song.cover
-            }" class="rounded me-3" width="50" height="50">
-            <div class="flex-grow-1">
+              <img src="${song.cover}" class="rounded me-3" width="50" height="50">
+              <div class="flex-grow-1">
                 <h6 class="mb-0">${song.title}</h6>
                 <small>${song.artist || "Unknown Artist"}</small>
-            </div>
-            <span id="visualizer-${index}" class="text-muted">${song.duration ? formatTime(song.duration) : "Loading..."
+              </div>
+              <span class="text-muted">${song.duration ? formatTime(song.duration) : "Loading..."
             }</span>
-        `;
+            `;
 
-          listItem.addEventListener("click", () => {
-            console.log("Klik lagu:", index); // Log ini harus tampil di console jika klik lagu
-            loadSong(index);
-          });
-
+          listItem.addEventListener("click", () => loadSong(index));
           playlist.appendChild(listItem);
         });
       }
@@ -613,92 +563,13 @@
         return `${min}:${sec < 10 ? "0" : ""}${sec}`;
       }
 
-
-      // function loadSong(index) {
-      //   if (!songs[index]) return;
-      //   songTitle.textContent = "Lagu: " + songs[index].title;
-      //   audioPlayer.src = songs[index].file;
-      //   audioPlayer.play();
-      //   updatePlayButton(true);
-      // }
-
       function loadSong(index) {
         if (!songs[index]) return;
-
-        console.log("Memutar lagu index:", index);
-
-        // Update audio src & play
-        const audioPlayer = document.getElementById("audio-player");
+        songTitle.textContent = "Lagu: " + songs[index].title;
         audioPlayer.src = songs[index].file;
         audioPlayer.load();
-        audioPlayer.play().catch((err) => console.error("Gagal memutar:", err));
-
-        // 🔹 Hapus semua visualizer yang sedang aktif
-        document.querySelectorAll(".visualizer").forEach((el) => {
-          el.classList.remove("visualizer");
-          el.textContent = ""; // Kosongkan visualizer lama
-        });
-
-        // 🔹 Tambahkan kembali durasi ke lagu sebelumnya
-        document.querySelectorAll(".playlist-item").forEach((item, i) => {
-          if (songs[i] && item.querySelector(".duration")) {
-            item.querySelector(".duration").textContent = songs[i].duration;
-          }
-        });
-
-        // 🔹 Tambahkan visualizer ke lagu yang baru dipilih
-        const visualizerEl = document.getElementById(`visualizer-${index}`);
-        if (visualizerEl) {
-          visualizerEl.classList.add("visualizer");
-          animateVisualizer(visualizerEl);
-        }
-
-        // 🔹 Kosongkan durasi lagu yang sedang dimainkan (jika ingin diganti dengan visualizer)
-        const currentItem = document.querySelector(`#song-${index} .duration`);
-        if (currentItem) {
-          currentItem.textContent = ""; // Kosongkan sementara
-        }
+        updatePlayButton(true);
       }
-
-
-
-
-      function animateVisualizer(element) {
-        let bars = ["||| ||| |||", "| | || | ||", "||| | || |||", "| || || |||"];
-        let i = 0;
-
-        let interval = setInterval(() => {
-          if (!element.classList.contains("visualizer")) {
-            clearInterval(interval);
-            return;
-          }
-          element.innerText = bars[i % bars.length];
-          i++;
-        }, 300);
-      }
-
-
-      async function loadSongsFromDB() {
-        try {
-          const response = await fetch("get_lagu.php");
-          songs = await response.json();
-          displayPlaylist(songs);
-        } catch (error) {
-          console.error("Error loading songs:", error);
-        }
-      }
-
-
-      async function loadSongsFromDB() {
-        try {
-          const response = await fetch("get_lagu.php");
-          songs = await response.json();
-          displayPlaylist(songs);
-        } catch (error) {
-          console.error("Error loading songs:", error);
-        }
-      }
-
 
       searchInput.addEventListener("input", function () {
         let query = this.value.toLowerCase();
