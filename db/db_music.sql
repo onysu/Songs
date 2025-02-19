@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 18 Feb 2025 pada 14.40
+-- Waktu pembuatan: 19 Feb 2025 pada 08.34
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -30,6 +30,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `lagu` (
   `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
+  `artist` varchar(255) DEFAULT NULL,
+  `cover` varchar(255) DEFAULT NULL,
   `file` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -37,9 +39,10 @@ CREATE TABLE `lagu` (
 -- Dumping data untuk tabel `lagu`
 --
 
-INSERT INTO `lagu` (`id`, `title`, `file`) VALUES
-(1, 'Fourtwnty', 'uploads/Fourtwnty-ZonaNyaman.mp3'),
-(2, 'Taylor Swift', 'uploads/Taylor Swift - Midnights.mp3');
+INSERT INTO `lagu` (`id`, `title`, `artist`, `cover`, `file`) VALUES
+(1, 'Midnights', 'Taylor Swift', 'uploads/1739919216_cover.jpg', 'uploads/1739919216_Taylor Swift - Midnights.mp3'),
+(3, 'Zona Nyaman', 'Fourtwnty', 'uploads/1739947671_cover.jpg', 'uploads/1739947671_Fourtwnty-ZonaNyaman.mp3'),
+(4, 'Aku Tenang', 'Fourtwnty', 'uploads/1739948178_cover.jpg', 'uploads/1739948178_Fourtwnty-AkuTenang.mp3');
 
 -- --------------------------------------------------------
 
@@ -97,7 +100,7 @@ ALTER TABLE `songs`
 -- AUTO_INCREMENT untuk tabel `lagu`
 --
 ALTER TABLE `lagu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `songs`
