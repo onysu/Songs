@@ -1,7 +1,7 @@
 <?php
 // get_songs.php
 header("Content-Type: application/json");
-require_once 'getid3/getid3.php';
+require_once 'vendor/autoload.php';
 
 $host = "localhost";
 $user = "root";
@@ -18,16 +18,16 @@ $sql = "SELECT title, artist, duration, file_path FROM songs";
 $result = $conn->query($sql);
 
 $songs = [];
-$getID3 = new getID3();
+$getID3 = new getID3;
 
 while ($row = $result->fetch_assoc()) {
   $file = $row['file_path'];
-  $coverPath = "uploads/covers/default_cover.png"; // Gambar default
+  $coverPath = "uploads/covers/default_cover.png";
   $duration = null; // Inisialisasi durasi sebagai null
 
   if (file_exists($file)) {
     $fileInfo = $getID3->analyze($file);
-    getid3_lib::CopyTagsToComments($fileInfo); // Salin metadata ke format lebih mudah
+    getid3_lib::CopyTagsToComments($fileInfo);
 
     // Ambil durasi jika tersedia
     if (!empty($fileInfo['playtime_seconds'])) {
