@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 19 Feb 2025 pada 08.34
+-- Waktu pembuatan: 20 Feb 2025 pada 14.17
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -40,9 +40,13 @@ CREATE TABLE `lagu` (
 --
 
 INSERT INTO `lagu` (`id`, `title`, `artist`, `cover`, `file`) VALUES
-(1, 'Midnights', 'Taylor Swift', 'uploads/1739919216_cover.jpg', 'uploads/1739919216_Taylor Swift - Midnights.mp3'),
-(3, 'Zona Nyaman', 'Fourtwnty', 'uploads/1739947671_cover.jpg', 'uploads/1739947671_Fourtwnty-ZonaNyaman.mp3'),
-(4, 'Aku Tenang', 'Fourtwnty', 'uploads/1739948178_cover.jpg', 'uploads/1739948178_Fourtwnty-AkuTenang.mp3');
+(1, 'Midnights', 'Taylor Swift', 'uploads/1740057266_cover.jpg', 'uploads/1740057266_Taylor Swift - Midnights.mp3'),
+(2, 'The Only Exception', 'Paramore', 'uploads/1740057292_cover.jpg', 'uploads/1740057292_Paramore - The Only Exception.mp3'),
+(3, 'Leave The Door Open', 'Bruno Mars, Anderson. Paak, Silk Sonic', 'uploads/1740057320_cover.jpg', 'uploads/1740057320_Bruno Mars, Anderson. Paak, Silk Sonic - Leave The Door Open.mp3'),
+(4, 'Riders On The Storm', 'The Doors', 'uploads/1740057355_cover.jpg', 'uploads/1740057355_The Doors - Riders On The Storm.mp3'),
+(5, 'Zona Nyaman', 'Fourtwnty', 'uploads/1740057377_cover.jpg', 'uploads/1740057377_Fourtwnty - Zona Nyaman.mp3'),
+(6, 'Aku Tenang', 'Fourtwnty', 'uploads/1740057398_cover.jpg', 'uploads/1740057398_Fourtwnty - Aku Tenang.mp3'),
+(7, 'Untuk Perempuan Yang Sedang Di Pelukan', 'Payung Teduh', 'uploads/1740057418_cover.jpg', 'uploads/1740057418_Payung Teduh - Untuk Perempuan Yang Sedang Di Pelukan.mp3');
 
 -- --------------------------------------------------------
 
@@ -100,7 +104,7 @@ ALTER TABLE `songs`
 -- AUTO_INCREMENT untuk tabel `lagu`
 --
 ALTER TABLE `lagu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `songs`
