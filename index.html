@@ -37,7 +37,7 @@
     </symbol>
   </svg>
 
-  <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
+  <div class="dropdown position-fixed bottom-0 end-0 me-3 bd-mode-toggle">
     <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button"
       aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
       <svg class="bi my-1 theme-icon-active" width="1em" height="1em">
@@ -115,7 +115,7 @@
     </nav>
   </header>
 
-  <main class="flex-shrink-0">
+  <main class="flex-shrink-0 mb-4">
     <div class="container">
       <div class="row align-items-md-stretch">
 
@@ -214,9 +214,9 @@
     </div>
   </main>
 
-  <footer class="footer mt-auto py-3 bg-body-tertiary">
+  <footer class="footer mt-auto py-2 bg-body-tertiary">
     <div class="container">
-      <span class="text-body-secondary">Place sticky footer content here.</span>
+      <span class="text-body-secondary">Made with <i class="bi bi-heart-fill"></i> Dev by Ony</span>
     </div>
   </footer>
   <script src="dist/bootstrap.bundle.min.js"></script>
@@ -328,8 +328,8 @@
         coverImage.src = songs[index].cover || "uploads/covers/default_cover.png";
 
         // Set ukuran langsung melalui JavaScript
-        coverImage.style.width = "400px";
-        coverImage.style.height = "400px";
+        coverImage.style.width = "333px";
+        coverImage.style.height = "333px";
         coverImage.style.objectFit = "cover";
 
         audioPlayer.src = songs[index].file;
