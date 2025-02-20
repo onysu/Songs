@@ -203,85 +203,6 @@
     }
   </style>
 
-  <!-- <style>
-    .bd-placeholder-img {
-      font-size: 1.125rem;
-      text-anchor: middle;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      user-select: none;
-    }
-
-    @media (min-width: 768px) {
-      .bd-placeholder-img-lg {
-        font-size: 3.5rem;
-      }
-    }
-
-    .b-example-divider {
-      width: 100%;
-      height: 3rem;
-      background-color: rgba(0, 0, 0, .1);
-      border: solid rgba(0, 0, 0, .15);
-      border-width: 1px 0;
-      box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-    }
-
-    .b-example-vr {
-      flex-shrink: 0;
-      width: 1.5rem;
-      height: 100vh;
-    }
-
-    .bi {
-      vertical-align: -.125em;
-      fill: currentColor;
-    }
-
-    .nav-scroller {
-      position: relative;
-      z-index: 2;
-      height: 2.75rem;
-      overflow-y: hidden;
-    }
-
-    .nav-scroller .nav {
-      display: flex;
-      flex-wrap: nowrap;
-      padding-bottom: 1rem;
-      margin-top: -1px;
-      overflow-x: auto;
-      text-align: center;
-      white-space: nowrap;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .btn-bd-primary {
-      --bd-violet-bg: #712cf9;
-      --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
-
-      --bs-btn-font-weight: 600;
-      --bs-btn-color: var(--bs-white);
-      --bs-btn-bg: var(--bd-violet-bg);
-      --bs-btn-border-color: var(--bd-violet-bg);
-      --bs-btn-hover-color: var(--bs-white);
-      --bs-btn-hover-bg: #6528e0;
-      --bs-btn-hover-border-color: #6528e0;
-      --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
-      --bs-btn-active-color: var(--bs-btn-hover-color);
-      --bs-btn-active-bg: #5a23c8;
-      --bs-btn-active-border-color: #5a23c8;
-    }
-
-    .bd-mode-toggle {
-      z-index: 1500;
-    }
-
-    .bd-mode-toggle .dropdown-menu .active .bi {
-      display: block !important;
-    }
-  </style> -->
-
   <style>
     /* body { */
     /* font-family: Arial, sans-serif; */
@@ -480,7 +401,7 @@
             </figure>
 
             <div class="audio-player">
-              <audio class="d-none" id="audioPlayer" controls></audio>
+              <!-- <audio id="audioPlayer" controls></audio> -->
               <audio id="audio-player">
                 <source src="" type="audio/mpeg">
               </audio>
@@ -512,6 +433,28 @@
                   <i class="bi bi-repeat"></i>
                 </button>
               </div>
+
+              <!-- <div class="player-controls">
+                <button class="neumorphic-btn" id="prev-btn">
+                  <i class="fas fa-backward"></i>
+                </button>
+
+                <button class="neumorphic-btn" id="play-btn">
+                  <i class="fas fa-play"></i>
+                </button>
+
+                <button class="neumorphic-btn" id="pause-btn">
+                  <i class="fas fa-pause"></i>
+                </button>
+
+                <button class="neumorphic-btn" id="next-btn">
+                  <i class="fas fa-forward"></i>
+                </button>
+              </div> -->
+
+              <!-- Tombol Repeat di bawah player controls -->
+              <!-- <button class="neumorphic-btn" id="repeat-btn">Repeat: Off</button> -->
+
 
               <!-- Volume -->
               <div class="volume-container">
@@ -578,30 +521,30 @@
         .catch(error => console.error("Error fetching songs:", error));
 
       // Perbarui durasi lagu yang masih NULL
-      function updateSongDurations() {
-        let promises = songs.map((song, index) => {
-          return new Promise((resolve) => {
-            let tempAudio = new Audio(song.file);
-            tempAudio.addEventListener("loadedmetadata", function () {
-              let duration = Math.floor(tempAudio.duration);
-              songs[index].duration = formatDuration(duration);
-              resolve();
-            });
-          });
-        });
+      // function updateSongDurations() {
+      //   let promises = songs.map((song, index) => {
+      //     return new Promise((resolve) => {
+      //       let tempAudio = new Audio(song.file);
+      //       tempAudio.addEventListener("loadedmetadata", function () {
+      //         let duration = Math.floor(tempAudio.duration);
+      //         songs[index].duration = formatDuration(duration);
+      //         resolve();
+      //       });
+      //     });
+      //   });
 
-        // Update playlist setelah semua durasi diperoleh
-        Promise.all(promises).then(() => {
-          displayPlaylist(songs);
-        });
-      }
+      //   // Update playlist setelah semua durasi diperoleh
+      //   Promise.all(promises).then(() => {
+      //     displayPlaylist(songs);
+      //   });
+      // }
 
       // Format durasi ke MM:SS
-      function formatDuration(seconds) {
-        let minutes = Math.floor(seconds / 60);
-        let secs = seconds % 60;
-        return `${minutes}:${secs.toString().padStart(2, "0")}`;
-      }
+      // function formatDuration(seconds) {
+      //   let minutes = Math.floor(seconds / 60);
+      //   let secs = seconds % 60;
+      //   return `${minutes}:${secs.toString().padStart(2, "0")}`;
+      // }
 
       function updateSongDurations() {
         songs.forEach((song, index) => {
@@ -614,7 +557,8 @@
         });
       }
 
-      // Tampilkan daftar playlist
+
+      // TAMPILKAN DAFTAR PLAYLIST
       function displayPlaylist(filteredSongs) {
         playlist.innerHTML = "";
         filteredSongs.forEach((song, index) => {
@@ -650,6 +594,8 @@
         updatePlayButton(true);
       }
 
+
+      // PENCARIAN LAGU
       searchInput.addEventListener("input", function () {
         let query = this.value.toLowerCase();
         let filteredSongs = songs.filter(
@@ -661,6 +607,8 @@
         displayPlaylist(filteredSongs); // 🔥 Tampilkan hanya hasil yang sesuai
       });
 
+
+      // TOMBOL
       function playPause() {
         if (audioPlayer.paused) {
           audioPlayer.play();
@@ -707,6 +655,8 @@
         repeatButton.innerHTML = `<i class="bi ${repeatIcons[repeatMode]}"></i>`;
       }
 
+
+      // PROGRES BAR
       function updateProgressBar() {
         let progressPercent = (audioPlayer.currentTime / audioPlayer.duration) * 100;
         progress.style.width = progressPercent + "%";
@@ -723,6 +673,8 @@
         audioPlayer.currentTime = (clickX / width) * duration;
       }
 
+
+      // TOMBOL MUTE
       function toggleMute() {
         audioPlayer.muted = !audioPlayer.muted;
         muteButton.innerHTML = audioPlayer.muted ? '<i class="bi bi-volume-mute"></i>' : '<i class="bi bi-volume-up"></i>';
@@ -760,7 +712,7 @@
       });
 
       // Load lagu dari database saat halaman dimuat
-      loadSongsFromDB();
+      // loadSongsFromDB();
     });
   </script>
 
