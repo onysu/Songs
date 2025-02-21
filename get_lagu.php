@@ -22,7 +22,7 @@ $getID3 = new getID3();
 
 while ($row = $result->fetch_assoc()) {
   $file = realpath($row['file']); // Pastikan path absolut
-  $coverPath = $row['cover'] ?: "uploads/covers/default_cover.png"; // Gunakan cover dari database atau default
+  $coverPath = $row['cover'] ?: "uploads/default_cover.png"; // Gunakan cover dari database atau default
   $duration = null;
 
   if ($file && file_exists($file)) {
@@ -42,7 +42,7 @@ while ($row = $result->fetch_assoc()) {
       $coverData = $fileInfo['comments']['picture'][0]['data'];
       $coverMime = $fileInfo['comments']['picture'][0]['image_mime'];
       $coverExt = str_replace('image/', '', $coverMime);
-      $coverPath = "uploads/covers/" . md5($file) . ".$coverExt";
+      $coverPath = "uploads/" . md5($file) . ".$coverExt";
 
       // Simpan cover jika belum ada
       if (!file_exists($coverPath)) {

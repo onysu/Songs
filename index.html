@@ -123,7 +123,7 @@
           <div class=" player text-center">
 
             <figure class="figure">
-              <img src="uploads/covers/default_cover.png" class="figure-img img-fluid rounded" alt="cover">
+              <img src="uploads/default_cover.png" class="figure-img img-fluid rounded" alt="cover">
               <figcaption class="figure-caption"><i class="fa-solid fa-headphones me-2"></i> <span id="song-title">Pilih
                   Lagu</span></figcaption>
             </figure>
@@ -310,7 +310,7 @@
 
       //   // Update cover lagu
       //   const coverImage = document.querySelector(".figure-img");
-      //   coverImage.src = songs[index].cover || "uploads/covers/default_cover.png"; // Jika cover tidak tersedia, gunakan default
+      //   coverImage.src = songs[index].cover || "uploads/default_cover.png"; // Jika cover tidak tersedia, gunakan default
 
       //   // Update sumber audio
       //   audioPlayer.src = songs[index].file;
@@ -324,7 +324,7 @@
         songTitle.textContent = songs[index].artist + " - " + songs[index].title;
 
         const coverImage = document.querySelector(".figure-img");
-        coverImage.src = songs[index].cover || "uploads/covers/default_cover.png";
+        coverImage.src = songs[index].cover || "uploads/default_cover.png";
 
         // Set ukuran langsung melalui JavaScript
         coverImage.style.width = "333px";
