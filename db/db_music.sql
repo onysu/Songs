@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 20 Feb 2025 pada 14.17
--- Versi server: 10.4.32-MariaDB
--- Versi PHP: 8.2.12
+-- Generation Time: Feb 21, 2025 at 09:01 AM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `lagu`
+-- Table structure for table `lagu`
 --
 
 CREATE TABLE `lagu` (
@@ -36,22 +36,40 @@ CREATE TABLE `lagu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `lagu`
+-- Dumping data for table `lagu`
 --
 
 INSERT INTO `lagu` (`id`, `title`, `artist`, `cover`, `file`) VALUES
-(1, 'Midnights', 'Taylor Swift', 'uploads/1740057266_cover.jpg', 'uploads/1740057266_Taylor Swift - Midnights.mp3'),
-(2, 'The Only Exception', 'Paramore', 'uploads/1740057292_cover.jpg', 'uploads/1740057292_Paramore - The Only Exception.mp3'),
-(3, 'Leave The Door Open', 'Bruno Mars, Anderson. Paak, Silk Sonic', 'uploads/1740057320_cover.jpg', 'uploads/1740057320_Bruno Mars, Anderson. Paak, Silk Sonic - Leave The Door Open.mp3'),
-(4, 'Riders On The Storm', 'The Doors', 'uploads/1740057355_cover.jpg', 'uploads/1740057355_The Doors - Riders On The Storm.mp3'),
-(5, 'Zona Nyaman', 'Fourtwnty', 'uploads/1740057377_cover.jpg', 'uploads/1740057377_Fourtwnty - Zona Nyaman.mp3'),
-(6, 'Aku Tenang', 'Fourtwnty', 'uploads/1740057398_cover.jpg', 'uploads/1740057398_Fourtwnty - Aku Tenang.mp3'),
-(7, 'Untuk Perempuan Yang Sedang Di Pelukan', 'Payung Teduh', 'uploads/1740057418_cover.jpg', 'uploads/1740057418_Payung Teduh - Untuk Perempuan Yang Sedang Di Pelukan.mp3');
+(1, 'Leave The Door Open', 'Bruno Mars, Anderson. Paak, Silk Sonic', 'uploads/1740124121_cover.jpg', 'uploads/1740124121_Bruno Mars, Anderson. Paak, Silk Sonic - Leave The Door Open.mp3'),
+(2, 'The Only Exception', 'Paramore', 'uploads/1740124153_cover.jpg', 'uploads/1740124153_Paramore - The Only Exception.mp3'),
+(3, 'Midnights', 'Taylor Swift', 'uploads/1740124176_cover.jpg', 'uploads/1740124176_Taylor Swift - Midnights.mp3'),
+(4, 'Chihiro', 'Billie Eilish', 'uploads/1740124204_cover.jpg', 'uploads/1740124204_Billie Eilish - Chihiro.mp3'),
+(5, 'A Feast of Friends', 'Jim Morrison', 'uploads/1740124246_cover.jpg', 'uploads/1740124246_Jim Morrison - A Feast of Friends.mp3'),
+(6, 'Riders on the Storm', 'The Doors', 'uploads/1740124267_cover.jpg', 'uploads/1740124267_The Doors - Riders on the Storm.mp3'),
+(7, 'Space Oddity', 'David Bowie', 'uploads/1740124292_cover.jpg', 'uploads/1740124292_David Bowie - Space Oddity.mp3'),
+(8, 'Estranged', 'Guns N\' Roses', 'uploads/1740124314_cover.jpg', 'uploads/1740124314_Guns N\' Roses - Estranged.mp3'),
+(9, 'November Rain', 'Guns N\' Roses', 'uploads/1740124335_cover.jpg', 'uploads/1740124334_Guns N\' Roses - November Rain.mp3'),
+(10, 'Zona Nyaman', 'Fourtwnty', 'uploads/1740124364_cover.jpg', 'uploads/1740124364_Fourtwnty - Zona Nyaman.mp3'),
+(11, 'Aku Tenang', 'Fourtwnty', 'uploads/1740124390_cover.jpg', 'uploads/1740124390_Fourtwnty - Aku Tenang.mp3'),
+(12, 'Untuk Perempuan Yang Sedang Di Pelukan', 'Payung Teduh, Mohammad Istiqomah', 'uploads/1740124442_cover.jpg', 'uploads/1740124442_Payung Teduh, Mohammad Istiqomah - Untuk Perempuan Yang Sedang Di Pelukan.mp3'),
+(13, 'Kasih Jangan Pergi', 'Bunga', 'uploads/1740124466_cover.jpg', 'uploads/1740124466_Bunga - Kasih Jangan Pergi.mp3'),
+(14, 'Ojo Ngono', 'Bunga', 'uploads/1740124488_cover.jpg', 'uploads/1740124488_Bunga - Ojo Ngono.mp3'),
+(15, 'Yang Terdalam', 'Peterpan', 'uploads/1740124523_cover.jpg', 'uploads/1740124523_Noah - Yang Terdalam.mp3'),
+(16, 'Suit-Suit... He-he... (Gadis Sexy)', 'Slank', 'uploads/1740124591_cover.jpg', 'uploads/1740124591_Slank - Suit-Suit... He-he... (Gadis Sexy).mp3'),
+(17, 'Memang', 'Slank', 'uploads/1740124623_cover.jpg', 'uploads/1740124623_Slank - Memang.mp3'),
+(18, 'Maafkan', 'Slank', 'uploads/1740124644_cover.jpg', 'uploads/1740124644_Slank - Maafkan.mp3'),
+(19, 'Apatis Blues', 'Slank', 'uploads/1740124677_cover.jpg', 'uploads/1740124677_Slank - Apatis Blues.mp3'),
+(20, 'American Style', 'Slank', 'uploads/1740124702_cover.jpg', 'uploads/1740124702_Slank - American Style.mp3'),
+(21, 'Aku Gila', 'Slank', 'uploads/1740124730_cover.jpg', 'uploads/1740124730_Slank - Aku Gila.mp3'),
+(22, 'Kalah', 'Slank', 'uploads/1740124756_cover.jpg', 'uploads/1740124755_Slank - Kalah.mp3'),
+(23, 'Bocah', 'Slank', 'uploads/1740124782_cover.jpg', 'uploads/1740124782_Slank - Bocah.mp3'),
+(24, 'Karang', 'Slank', 'uploads/1740124811_cover.jpg', 'uploads/1740124811_Slank - Karang.mp3'),
+(25, 'Ladies Night Di Ebony', 'Slank', 'uploads/1740124846_cover.jpg', 'uploads/1740124846_Slank - Ladies Night Di Ebony.mp3');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `songs`
+-- Table structure for table `songs`
 --
 
 CREATE TABLE `songs` (
@@ -63,7 +81,7 @@ CREATE TABLE `songs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `songs`
+-- Dumping data for table `songs`
 --
 
 INSERT INTO `songs` (`id`, `title`, `artist`, `file_path`, `duration`) VALUES
@@ -83,13 +101,13 @@ INSERT INTO `songs` (`id`, `title`, `artist`, `file_path`, `duration`) VALUES
 --
 
 --
--- Indeks untuk tabel `lagu`
+-- Indexes for table `lagu`
 --
 ALTER TABLE `lagu`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `songs`
+-- Indexes for table `songs`
 --
 ALTER TABLE `songs`
   ADD PRIMARY KEY (`id`),
@@ -97,17 +115,17 @@ ALTER TABLE `songs`
   ADD KEY `idx_artist` (`artist`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `lagu`
+-- AUTO_INCREMENT for table `lagu`
 --
 ALTER TABLE `lagu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
--- AUTO_INCREMENT untuk tabel `songs`
+-- AUTO_INCREMENT for table `songs`
 --
 ALTER TABLE `songs`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
