@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 21, 2025 at 09:01 AM
+-- Generation Time: Feb 22, 2025 at 05:55 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -64,7 +64,12 @@ INSERT INTO `lagu` (`id`, `title`, `artist`, `cover`, `file`) VALUES
 (22, 'Kalah', 'Slank', 'uploads/1740124756_cover.jpg', 'uploads/1740124755_Slank - Kalah.mp3'),
 (23, 'Bocah', 'Slank', 'uploads/1740124782_cover.jpg', 'uploads/1740124782_Slank - Bocah.mp3'),
 (24, 'Karang', 'Slank', 'uploads/1740124811_cover.jpg', 'uploads/1740124811_Slank - Karang.mp3'),
-(25, 'Ladies Night Di Ebony', 'Slank', 'uploads/1740124846_cover.jpg', 'uploads/1740124846_Slank - Ladies Night Di Ebony.mp3');
+(25, 'Ladies Night Di Ebony', 'Slank', 'uploads/1740124846_cover.jpg', 'uploads/1740124846_Slank - Ladies Night Di Ebony.mp3'),
+(26, 'Mobil Balap', 'Naif', 'uploads/1740241468_cover.jpg', 'uploads/1740241468_Naif - Mobil Balap.mp3'),
+(27, 'Benci Untuk Mencinta', 'Naif', 'uploads/1740241494_cover.jpg', 'uploads/1740241494_Naif - Benci Untuk Mencinta.mp3'),
+(28, 'Lampu Merah', 'The Lantis', 'uploads/1740241517_cover.jpg', 'uploads/1740241517_The Lantis - Lampu Merah.mp3'),
+(29, 'Bunga Maaf', 'The Lantis', 'uploads/1740241538_cover.jpg', 'uploads/1740241538_The Lantis - Bunga Maaf.mp3'),
+(30, 'Cinta Yang Lain', 'Ungu Feat. Chrisye', 'uploads/1740241559_cover.jpg', 'uploads/1740241559_Ungu Feat. Chrisye - Cinta Yang Lain.mp3');
 
 -- --------------------------------------------------------
 
@@ -122,7 +127,7 @@ ALTER TABLE `songs`
 -- AUTO_INCREMENT for table `lagu`
 --
 ALTER TABLE `lagu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `songs`
