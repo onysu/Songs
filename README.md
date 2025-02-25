@@ -24,3 +24,11 @@ composer diagnose
 Pastikan paket james-heinrich/getid3 masih ada di composer.json. Cek dengan:
 composer show james-heinrich/getid3
 
+Cek apakah getID3 sudah terinstal dengan Composer:
+composer show | findstr getid3
+
+ Update getID3 dengan Composer:
+ composer update
+
+
+
